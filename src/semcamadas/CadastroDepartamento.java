@@ -3,7 +3,7 @@ package semcamadas;
 
 /**
  *
- * @author Abigail
+ * @author Abigail && Miguel
  * 
  */
 

@@ -2,7 +2,7 @@ package semcamadas;
 
 /**
  *
- * @author Abigail
+ * @author Abigail && Miguel
  */
 
 public class Departamento {
