@@ -1,5 +1,8 @@
 
-package semcamadas;
+package Interface;
+
+import Interface.CadastroDepartamento;
+import Interface.CadastroFuncionario;
 
 /**
  *
@@ -50,13 +53,17 @@ public class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro da Universidade");
         setName("telaInicial"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(750, 400));
         setResizable(false);
-        setSize(new java.awt.Dimension(750, 400));
+        setSize(new java.awt.Dimension(400, 400));
 
         MenuRelatorio.setText("Relatório");
 
         ResumoGeral.setText("Resumo Geral");
+        ResumoGeral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResumoGeralActionPerformed(evt);
+            }
+        });
         MenuRelatorio.add(ResumoGeral);
 
         ResumoDepartamentos.setText("Resumo dos Departamentos");
@@ -106,11 +113,11 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1024, Short.MAX_VALUE)
+            .addGap(0, 750, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+            .addGap(0, 412, Short.MAX_VALUE)
         );
 
         pack();
@@ -127,6 +134,10 @@ public class TelaInicial extends javax.swing.JFrame {
             new CadastroDepartamento().setVisible(true);
         });
     }//GEN-LAST:event_addDepartamentoActionPerformed
+
+    private void ResumoGeralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResumoGeralActionPerformed
+
+    }//GEN-LAST:event_ResumoGeralActionPerformed
 
     /**
      * @param args the command line arguments

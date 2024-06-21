@@ -1,15 +1,16 @@
-package semcamadas;
+package Interface;
+
+import Controlador.Controlador;
 
 /**
  *
- * @author Abigail
+ * @author Abigail && Miguel
  *
  */
 
 public class Main {
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> {
-            new TelaInicial().setVisible(true);
-        });
+        Controlador control = new Controlador();
+        control.executar();
     }
 }

@@ -1,4 +1,4 @@
-package semcamadas;
+package Modelo;
 
 /**
  *

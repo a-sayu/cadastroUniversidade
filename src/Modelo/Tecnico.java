@@ -1,4 +1,6 @@
-package semcamadas;
+package Modelo;
+
+import Modelo.Funcionario;
 
 /**
  *

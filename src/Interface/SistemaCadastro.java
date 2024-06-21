@@ -1,4 +1,7 @@
-package semcamadas;
+package Interface;
+
+import Interface.TelaInicial;
+import Modelo.Departamento;
 
 /**
  *
@@ -7,6 +10,15 @@ package semcamadas;
  */
 
 public class SistemaCadastro {
+    
+    public SistemaCadastro() {}
+    
+    public void executar() {
+        System.out.println("Inicio");
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaInicial().setVisible(true);
+        });
+    }
     
     public static void geral () {
         /**

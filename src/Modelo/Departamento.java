@@ -1,8 +1,9 @@
-package semcamadas;
+package Modelo;
 
 /**
  *
  * @author Abigail && Miguel
+ * 
  */
 
 public class Departamento {
@@ -35,6 +36,24 @@ public class Departamento {
         } else System.out.println("error: not enough space");
     }
     
+    public Funcionario buscarFuncionarioCodigo (String codigo) {
+        for (int i = 0; i < cont; i++) {
+            if (funcionarios[i].getCodigo().equals(codigo)) {
+                return funcionarios[i];
+            }
+        }
+        return null;
+    }
+    
+    public Funcionario buscarFuncionarioNome (String nome) {
+        for (int i = 0; i < cont; i++) {
+            if (funcionarios[i].getNome().equals(nome)) {
+                return funcionarios[i];
+            }
+        }
+        return null;
+    }
+    
     public double calcularGasto() {
         double gasto = 0;
         for (int i = 0; i < cont; i++) {
@@ -59,6 +78,10 @@ public class Departamento {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    
+    public int getCont() {
+        return cont;
     }
 
     public int getMAX() {

@@ -1,8 +1,8 @@
-package semcamadas;
+package Modelo;
 
 /**
  *
- * @author Abigail
+ * @author Abigail && Miguel
  *
  */
 

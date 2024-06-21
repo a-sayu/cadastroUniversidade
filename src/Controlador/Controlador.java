@@ -2,11 +2,35 @@ package Controlador;
 
 /**
  *
- * @author Abigail
+ * @author Abigail && Miguel
  *
  */
-import semcamadas.Universidade;
+import Interface.SistemaCadastro;
+import Modelo.Funcionario;
+import Modelo.Departamento;
+import Modelo.Universidade;
 
 public class Controlador {
-    private Universidade universidade = new Universidade(); 
+    private static Universidade universidade = new Universidade("UNESP");
+    
+    public void executar () {
+        SistemaCadastro sistema = new SistemaCadastro();
+        sistema.executar();
+    }
+    
+    public void adicionarDepartamento(Departamento departamento) {
+        universidade.addDepartamento(departamento);
+    }
+    public void adicionarFuncinario(Funcionario funcionario, String codigoDepartamento) {
+        universidade.addFuncionario(funcionario, codigoDepartamento);
+    }
+
+    // Get && Set
+    
+    public static Universidade getUniversidade() {
+        return universidade;
+    }
+    public static void setUniversidade(Universidade universidade) {
+        Controlador.universidade = universidade;
+    }
 }
