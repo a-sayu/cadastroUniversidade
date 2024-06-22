@@ -1,7 +1,5 @@
 package Modelo;
 
-import Modelo.Funcionario;
-
 /**
  *
  * @author Abigail

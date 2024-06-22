@@ -7,7 +7,6 @@ import Modelo.Funcionario;
 import Modelo.Substituto;
 import Modelo.Tecnico;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JDialog;
 
 /**
  *
@@ -170,7 +169,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         buttonGroup1.add(yesRadioBtn);
         yesRadioBtn.setText("Sim");
-        yesRadioBtn.setMaximumSize(null);
         yesRadioBtn.setPreferredSize(new java.awt.Dimension(50, 30));
         yesRadioBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,7 +178,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         buttonGroup1.add(noRadioBtn);
         noRadioBtn.setText("Não");
-        noRadioBtn.setMaximumSize(null);
         noRadioBtn.setPreferredSize(new java.awt.Dimension(50, 30));
         noRadioBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -419,7 +416,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             String funcao = (String) funcaoSelector.getSelectedItem();
             Funcionario f = new Tecnico(codigo, nome, salario, nivel, funcao);
             control.adicionarFuncinario(f, deptoCodeField.getText());
-        } else {
+        } else if (tipo == 2) {
             if (yesRadioBtn.isSelected()) {
                 String codigo = funcCodeField.getText();
                 String nome = funcNameField.getText();
@@ -430,7 +427,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                 Funcionario f = new Efetivo(codigo, nome, salario, nivel, titulacao, area);
                 control.adicionarFuncinario(f, deptoCodeField.getText());
             }
-            else {
+            else if (noRadioBtn.isSelected()){
                 String codigo = funcCodeField.getText();
                 String nome = funcNameField.getText();
                 String nivel = (String) nivelSelector.getSelectedItem();

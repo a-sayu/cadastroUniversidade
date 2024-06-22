@@ -1,6 +1,5 @@
 package Interface;
 
-import Interface.TelaInicial;
 import Modelo.Departamento;
 
 /**

@@ -24,7 +24,19 @@ public class Controlador {
     public void adicionarFuncinario(Funcionario funcionario, String codigoDepartamento) {
         universidade.addFuncionario(funcionario, codigoDepartamento);
     }
-
+    
+    public Departamento buscarDepartamento(String codigoDepto) {
+        Departamento d;
+        d = universidade.buscarDepartamento(codigoDepto);
+        return d;
+    }
+    
+    public Funcionario buscarFuncionario(String codigoFunc) {
+        Funcionario f;
+        f = universidade.buscarFuncionarioPorCodigo(codigoFunc);
+        return f;
+    }
+    
     // Get && Set
     
     public static Universidade getUniversidade() {
