@@ -1,8 +1,10 @@
 
 package Interface;
 
+import Controlador.Controlador;
 import Interface.CadastroDepartamento;
 import Interface.CadastroFuncionario;
+import Modelo.Departamento;
 
 /**
  *
@@ -31,18 +33,27 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        BuscaPanel = new javax.swing.JPanel();
+        buscaField = new javax.swing.JTextField();
+        buscaLabel = new javax.swing.JLabel();
+        buscaBtn = new javax.swing.JButton();
+        filtroCheckBox = new javax.swing.JCheckBox();
+        codBuscaBtn = new javax.swing.JRadioButton();
+        nomeBuscaBtn = new javax.swing.JRadioButton();
         BarraDeFerramentas = new javax.swing.JMenuBar();
         MenuRelatorio = new javax.swing.JMenu();
-        ResumoGeral = new javax.swing.JMenuItem();
-        ResumoDepartamentos = new javax.swing.JMenuItem();
-        resumoFuncionarios = new javax.swing.JMenuItem();
+        resumoGeral = new javax.swing.JMenuItem();
+        resumoDepartamento = new javax.swing.JMenuItem();
+        resumoFuncionario = new javax.swing.JMenuItem();
         MenuDepartamentos = new javax.swing.JMenu();
         addDepartamento = new javax.swing.JMenuItem();
         departamentos = new javax.swing.JMenuItem();
         MenuFuncionarios = new javax.swing.JMenu();
         addFunc = new javax.swing.JMenuItem();
         funcionarios = new javax.swing.JMenuItem();
-        busca = new javax.swing.JMenuItem();
+        Busca = new javax.swing.JMenu();
+        buscaItem = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -53,24 +64,82 @@ public class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro da Universidade");
         setName("telaInicial"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(600, 400));
         setResizable(false);
-        setSize(new java.awt.Dimension(400, 400));
+        setSize(new java.awt.Dimension(600, 400));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
+
+        buscaLabel.setText("Busca:");
+
+        buscaBtn.setText("Fazer Busca");
+        buscaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscaBtnActionPerformed(evt);
+            }
+        });
+
+        filtroCheckBox.setText("Ver Mais Filtros");
+
+        buttonGroup1.add(codBuscaBtn);
+        codBuscaBtn.setSelected(true);
+        codBuscaBtn.setText("Por Código");
+
+        buttonGroup1.add(nomeBuscaBtn);
+        nomeBuscaBtn.setText("Por Nome");
+
+        javax.swing.GroupLayout BuscaPanelLayout = new javax.swing.GroupLayout(BuscaPanel);
+        BuscaPanel.setLayout(BuscaPanelLayout);
+        BuscaPanelLayout.setHorizontalGroup(
+            BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BuscaPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaPanelLayout.createSequentialGroup()
+                        .addComponent(filtroCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nomeBuscaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(codBuscaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(BuscaPanelLayout.createSequentialGroup()
+                        .addComponent(buscaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buscaBtn))
+                    .addComponent(buscaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
+        BuscaPanelLayout.setVerticalGroup(
+            BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscaLabel)
+                    .addComponent(buscaBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buscaField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filtroCheckBox)
+                    .addComponent(codBuscaBtn)
+                    .addComponent(nomeBuscaBtn))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        BarraDeFerramentas.setPreferredSize(new java.awt.Dimension(256, 30));
 
         MenuRelatorio.setText("Relatório");
 
-        ResumoGeral.setText("Resumo Geral");
-        ResumoGeral.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResumoGeralActionPerformed(evt);
-            }
-        });
-        MenuRelatorio.add(ResumoGeral);
+        resumoGeral.setText("Resumo Geral");
+        MenuRelatorio.add(resumoGeral);
 
-        ResumoDepartamentos.setText("Resumo dos Departamentos");
-        MenuRelatorio.add(ResumoDepartamentos);
+        resumoDepartamento.setText("Resumo dos Departamentos");
+        MenuRelatorio.add(resumoDepartamento);
 
-        resumoFuncionarios.setText("Resumo dos Funcionarios");
-        MenuRelatorio.add(resumoFuncionarios);
+        resumoFuncionario.setText("Resumo dos Funcionarios");
+        MenuRelatorio.add(resumoFuncionario);
 
         BarraDeFerramentas.add(MenuRelatorio);
 
@@ -84,7 +153,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         MenuDepartamentos.add(addDepartamento);
 
-        departamentos.setText("Departamentos");
+        departamentos.setText("Todos os Departamentos");
         MenuDepartamentos.add(departamentos);
 
         BarraDeFerramentas.add(MenuDepartamentos);
@@ -99,13 +168,22 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         MenuFuncionarios.add(addFunc);
 
-        funcionarios.setText("Funcionarios");
+        funcionarios.setText("Todos os Funcionarios");
         MenuFuncionarios.add(funcionarios);
 
-        busca.setText("Buscar Funcionario");
-        MenuFuncionarios.add(busca);
-
         BarraDeFerramentas.add(MenuFuncionarios);
+
+        Busca.setText("Busca");
+
+        buscaItem.setText("Fazer Busca");
+        buscaItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscaItemActionPerformed(evt);
+            }
+        });
+        Busca.add(buscaItem);
+
+        BarraDeFerramentas.add(Busca);
 
         setJMenuBar(BarraDeFerramentas);
 
@@ -113,11 +191,17 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BuscaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(BuscaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,9 +219,25 @@ public class TelaInicial extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_addDepartamentoActionPerformed
 
-    private void ResumoGeralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResumoGeralActionPerformed
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        BuscaPanel.setVisible(false);
+    }//GEN-LAST:event_formComponentShown
 
-    }//GEN-LAST:event_ResumoGeralActionPerformed
+    private void buscaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaItemActionPerformed
+        BuscaPanel.setVisible(true);
+    }//GEN-LAST:event_buscaItemActionPerformed
+
+    private void buscaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaBtnActionPerformed
+        boolean buscaPorCodigo = codBuscaBtn.isSelected();
+        String codigo = buscaField.getText();
+        Controlador control = new Controlador();
+        if (buscaPorCodigo) {
+            Departamento d = control.buscarDepartamento(codigo);
+            System.out.println(d.getNome());
+        } else {
+            
+        }
+    }//GEN-LAST:event_buscaBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,19 +275,28 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarraDeFerramentas;
+    private javax.swing.JMenu Busca;
+    private javax.swing.JPanel BuscaPanel;
     private javax.swing.JMenu MenuDepartamentos;
     private javax.swing.JMenu MenuFuncionarios;
     private javax.swing.JMenu MenuRelatorio;
-    private javax.swing.JMenuItem ResumoDepartamentos;
-    private javax.swing.JMenuItem ResumoGeral;
     private javax.swing.JMenuItem addDepartamento;
     private javax.swing.JMenuItem addFunc;
-    private javax.swing.JMenuItem busca;
+    private javax.swing.JButton buscaBtn;
+    private javax.swing.JTextField buscaField;
+    private javax.swing.JMenuItem buscaItem;
+    private javax.swing.JLabel buscaLabel;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton codBuscaBtn;
     private javax.swing.JMenuItem departamentos;
+    private javax.swing.JCheckBox filtroCheckBox;
     private javax.swing.JMenuItem funcionarios;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuItem resumoFuncionarios;
+    private javax.swing.JRadioButton nomeBuscaBtn;
+    private javax.swing.JMenuItem resumoDepartamento;
+    private javax.swing.JMenuItem resumoFuncionario;
+    private javax.swing.JMenuItem resumoGeral;
     // End of variables declaration//GEN-END:variables
 }
