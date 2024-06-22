@@ -5,6 +5,7 @@ import Controlador.Controlador;
 import Interface.CadastroDepartamento;
 import Interface.CadastroFuncionario;
 import Modelo.Departamento;
+import Modelo.Funcionario;
 
 /**
  *
@@ -34,13 +35,16 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         BuscaPanel = new javax.swing.JPanel();
         buscaField = new javax.swing.JTextField();
         buscaLabel = new javax.swing.JLabel();
         buscaBtn = new javax.swing.JButton();
         filtroCheckBox = new javax.swing.JCheckBox();
-        codBuscaBtn = new javax.swing.JRadioButton();
-        nomeBuscaBtn = new javax.swing.JRadioButton();
+        codBuscaRadio = new javax.swing.JRadioButton();
+        nomeBuscaRadio = new javax.swing.JRadioButton();
+        funcBuscaRadio = new javax.swing.JRadioButton();
+        deptoBuscaRadio = new javax.swing.JRadioButton();
         BarraDeFerramentas = new javax.swing.JMenuBar();
         MenuRelatorio = new javax.swing.JMenu();
         resumoGeral = new javax.swing.JMenuItem();
@@ -84,48 +88,63 @@ public class TelaInicial extends javax.swing.JFrame {
 
         filtroCheckBox.setText("Ver Mais Filtros");
 
-        buttonGroup1.add(codBuscaBtn);
-        codBuscaBtn.setSelected(true);
-        codBuscaBtn.setText("Por Código");
+        buttonGroup1.add(codBuscaRadio);
+        codBuscaRadio.setText("Por Código");
 
-        buttonGroup1.add(nomeBuscaBtn);
-        nomeBuscaBtn.setText("Por Nome");
+        buttonGroup1.add(nomeBuscaRadio);
+        nomeBuscaRadio.setText("Por Nome");
+
+        buttonGroup2.add(funcBuscaRadio);
+        funcBuscaRadio.setSelected(true);
+        funcBuscaRadio.setText("de Funcionários");
+
+        buttonGroup2.add(deptoBuscaRadio);
+        deptoBuscaRadio.setText("de Departamentos");
 
         javax.swing.GroupLayout BuscaPanelLayout = new javax.swing.GroupLayout(BuscaPanel);
         BuscaPanel.setLayout(BuscaPanelLayout);
         BuscaPanelLayout.setHorizontalGroup(
             BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BuscaPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaPanelLayout.createSequentialGroup()
-                        .addComponent(filtroCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nomeBuscaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(codBuscaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(BuscaPanelLayout.createSequentialGroup()
+                            .addComponent(buscaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(buscaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(BuscaPanelLayout.createSequentialGroup()
-                        .addComponent(buscaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buscaBtn))
-                    .addComponent(buscaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(funcBuscaRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(deptoBuscaRadio))
+                        .addGap(27, 27, 27)
+                        .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codBuscaRadio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nomeBuscaRadio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(100, 100, 100)
+                        .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(filtroCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buscaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(20, 20, 20))
         );
         BuscaPanelLayout.setVerticalGroup(
             BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BuscaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscaLabel)
-                    .addComponent(buscaBtn))
+                .addComponent(buscaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buscaField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filtroCheckBox)
-                    .addComponent(codBuscaBtn)
-                    .addComponent(nomeBuscaBtn))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(funcBuscaRadio)
+                    .addComponent(nomeBuscaRadio)
+                    .addComponent(filtroCheckBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(BuscaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codBuscaRadio)
+                    .addComponent(deptoBuscaRadio)
+                    .addComponent(buscaBtn))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         BarraDeFerramentas.setPreferredSize(new java.awt.Dimension(256, 30));
@@ -201,7 +220,7 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(BuscaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
 
         pack();
@@ -228,14 +247,28 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_buscaItemActionPerformed
 
     private void buscaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaBtnActionPerformed
-        boolean buscaPorCodigo = codBuscaBtn.isSelected();
-        String codigo = buscaField.getText();
+        boolean forma = codBuscaRadio.isSelected();
+        boolean tipo = funcBuscaRadio.isSelected();
+        String termo = buscaField.getText();
         Controlador control = new Controlador();
-        if (buscaPorCodigo) {
-            Departamento d = control.buscarDepartamento(codigo);
-            System.out.println(d.getNome());
+        if (forma == true) { // Por Codigo
+            if (tipo == false) { // Por Departamento
+                Departamento d = control.buscarDepartamento(termo);
+                if (d != null) System.out.println("found");
+            } else { // Por Funcionario
+                Funcionario f = control.buscarFuncionario(termo);
+                if (f != null) System.out.println("found");
+            }
+        } else if (forma == true) { // Por Nome
+            if (tipo == false) { // Por Departamento
+                Departamento d = control.buscarDepartamentoNome(termo);
+                if (d != null) System.out.println("found");
+            } else { // Por Funcionario
+                Funcionario f = control.buscarFuncionarioNome(termo);
+                if (f != null) System.out.println("found");
+            }
         } else {
-            
+            System.out.println("not found");
         }
     }//GEN-LAST:event_buscaBtnActionPerformed
 
@@ -268,6 +301,7 @@ public class TelaInicial extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(() -> {
             new TelaInicial().setVisible(true);
         });
@@ -287,14 +321,17 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem buscaItem;
     private javax.swing.JLabel buscaLabel;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JRadioButton codBuscaBtn;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JRadioButton codBuscaRadio;
     private javax.swing.JMenuItem departamentos;
+    private javax.swing.JRadioButton deptoBuscaRadio;
     private javax.swing.JCheckBox filtroCheckBox;
+    private javax.swing.JRadioButton funcBuscaRadio;
     private javax.swing.JMenuItem funcionarios;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JRadioButton nomeBuscaBtn;
+    private javax.swing.JRadioButton nomeBuscaRadio;
     private javax.swing.JMenuItem resumoDepartamento;
     private javax.swing.JMenuItem resumoFuncionario;
     private javax.swing.JMenuItem resumoGeral;
