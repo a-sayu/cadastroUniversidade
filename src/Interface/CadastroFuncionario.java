@@ -1,6 +1,14 @@
 
 package Interface;
 
+import Controlador.Controlador;
+import Modelo.Efetivo;
+import Modelo.Funcionario;
+import Modelo.Substituto;
+import Modelo.Tecnico;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
+
 /**
  *
  * @author Abigail && Miguel
@@ -26,9 +34,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
         funcNameField = new javax.swing.JTextField();
         funcCode = new javax.swing.JLabel();
         funcCodeField = new javax.swing.JTextField();
@@ -40,21 +45,28 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         deptoName = new javax.swing.JLabel();
         deptoNameField = new javax.swing.JTextField();
         salary = new javax.swing.JLabel();
-        salaryField = new javax.swing.JTextField();
+        salaryBaseField = new javax.swing.JTextField();
         nivelLabel = new javax.swing.JLabel();
         nivelSelector = new javax.swing.JComboBox<>();
-        salary1 = new javax.swing.JLabel();
-        salaryField1 = new javax.swing.JTextField();
-        clearButton = new javax.swing.JButton();
-        saveButton1 = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
-        changePanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        nivelSelector1 = new javax.swing.JComboBox<>();
-        changePanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        salarioFinalLabel = new javax.swing.JLabel();
+        salarioFinalField = new javax.swing.JTextField();
+        limparButton = new javax.swing.JButton();
+        salvarButton = new javax.swing.JButton();
+        tecnicoPanel = new javax.swing.JPanel();
+        funcaoLabel = new javax.swing.JLabel();
+        funcaoSelector = new javax.swing.JComboBox<>();
+        docentePanel = new javax.swing.JPanel();
+        efetivadoLabel = new javax.swing.JLabel();
+        yesRadioBtn = new javax.swing.JRadioButton();
+        noRadioBtn = new javax.swing.JRadioButton();
+        titulacaoSelector = new javax.swing.JComboBox<>();
+        titulacaoLabel = new javax.swing.JLabel();
+        efetivoPanel = new javax.swing.JPanel();
+        areaLabel = new javax.swing.JLabel();
+        areaSelector = new javax.swing.JComboBox<>();
+        substitutoPanel = new javax.swing.JPanel();
+        cargaHorariaLabel = new javax.swing.JLabel();
+        cargaHorariaSelector = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Funcionario");
@@ -69,21 +81,11 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         });
 
         funcNameField.setPreferredSize(new java.awt.Dimension(500, 22));
-        funcNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funcNameFieldActionPerformed(evt);
-            }
-        });
 
         funcCode.setText("Código do Funcionário");
         funcCode.setPreferredSize(new java.awt.Dimension(150, 25));
 
         funcCodeField.setPreferredSize(new java.awt.Dimension(150, 22));
-        funcCodeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funcCodeFieldActionPerformed(evt);
-            }
-        });
 
         funcName.setText("Nome do Funcionário");
         funcName.setPreferredSize(new java.awt.Dimension(500, 25));
@@ -111,122 +113,168 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         salary.setText("Salário Base");
         salary.setPreferredSize(new java.awt.Dimension(150, 25));
 
-        salaryField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salaryFieldActionPerformed(evt);
-            }
-        });
-
         nivelLabel.setText("Nível");
         nivelLabel.setPreferredSize(new java.awt.Dimension(150, 25));
 
-        nivelSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "T1", "T2" }));
+        nivelSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
         nivelSelector.setToolTipText("");
-        nivelSelector.addActionListener(new java.awt.event.ActionListener() {
+
+        salarioFinalLabel.setText("Salário Final");
+        salarioFinalLabel.setPreferredSize(new java.awt.Dimension(150, 25));
+
+        limparButton.setText("Limpar");
+        limparButton.setPreferredSize(new java.awt.Dimension(100, 30));
+        limparButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nivelSelectorActionPerformed(evt);
+                limparButtonActionPerformed(evt);
             }
         });
 
-        salary1.setText("Salário Final");
-        salary1.setPreferredSize(new java.awt.Dimension(150, 25));
-
-        salaryField1.addActionListener(new java.awt.event.ActionListener() {
+        salvarButton.setText("Salvar");
+        salvarButton.setPreferredSize(new java.awt.Dimension(100, 30));
+        salvarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salaryField1ActionPerformed(evt);
+                salvarButtonActionPerformed(evt);
             }
         });
 
-        clearButton.setText("Limpar");
-        clearButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearButtonActionPerformed(evt);
-            }
-        });
+        tecnicoPanel.setPreferredSize(new java.awt.Dimension(150, 60));
 
-        saveButton1.setText("Salvar");
-        saveButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButton1ActionPerformed(evt);
-            }
-        });
+        funcaoLabel.setText("Função");
 
-        backButton.setText("Voltar");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        funcaoSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Assessor", "Laboratório", "Secretário" }));
+        funcaoSelector.setToolTipText("");
 
-        changePanel.setPreferredSize(new java.awt.Dimension(150, 60));
-
-        jLabel1.setText("Função");
-
-        nivelSelector1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Assessor", "Laboratório", "Secretário" }));
-        nivelSelector1.setToolTipText("");
-        nivelSelector1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nivelSelector1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout changePanelLayout = new javax.swing.GroupLayout(changePanel);
-        changePanel.setLayout(changePanelLayout);
-        changePanelLayout.setHorizontalGroup(
-            changePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(changePanelLayout.createSequentialGroup()
-                .addGroup(changePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(nivelSelector1, javax.swing.GroupLayout.Alignment.LEADING, 0, 150, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout tecnicoPanelLayout = new javax.swing.GroupLayout(tecnicoPanel);
+        tecnicoPanel.setLayout(tecnicoPanelLayout);
+        tecnicoPanelLayout.setHorizontalGroup(
+            tecnicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tecnicoPanelLayout.createSequentialGroup()
+                .addGroup(tecnicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(funcaoSelector, javax.swing.GroupLayout.Alignment.LEADING, 0, 150, Short.MAX_VALUE)
+                    .addComponent(funcaoLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        changePanelLayout.setVerticalGroup(
-            changePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(changePanelLayout.createSequentialGroup()
-                .addComponent(jLabel1)
+        tecnicoPanelLayout.setVerticalGroup(
+            tecnicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tecnicoPanelLayout.createSequentialGroup()
+                .addComponent(funcaoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nivelSelector1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(funcaoSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        changePanel1.setPreferredSize(new java.awt.Dimension(150, 60));
+        docentePanel.setPreferredSize(new java.awt.Dimension(150, 60));
 
-        jLabel2.setText("Efetivado");
+        efetivadoLabel.setText("Efetivado");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Sim");
-        jRadioButton1.setMaximumSize(null);
-        jRadioButton1.setPreferredSize(new java.awt.Dimension(50, 30));
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(yesRadioBtn);
+        yesRadioBtn.setText("Sim");
+        yesRadioBtn.setMaximumSize(null);
+        yesRadioBtn.setPreferredSize(new java.awt.Dimension(50, 30));
+        yesRadioBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                yesRadioBtnActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Não");
-        jRadioButton2.setMaximumSize(null);
-        jRadioButton2.setPreferredSize(new java.awt.Dimension(50, 30));
+        buttonGroup1.add(noRadioBtn);
+        noRadioBtn.setText("Não");
+        noRadioBtn.setMaximumSize(null);
+        noRadioBtn.setPreferredSize(new java.awt.Dimension(50, 30));
+        noRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noRadioBtnActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout changePanel1Layout = new javax.swing.GroupLayout(changePanel1);
-        changePanel1.setLayout(changePanel1Layout);
-        changePanel1Layout.setHorizontalGroup(
-            changePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(changePanel1Layout.createSequentialGroup()
-                .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+        titulacaoSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Graduação", "Mestrado", "Doutorado", "Livre-Docente", "Titular" }));
+        titulacaoSelector.setToolTipText("");
+
+        titulacaoLabel.setText("Titulação");
+
+        javax.swing.GroupLayout docentePanelLayout = new javax.swing.GroupLayout(docentePanel);
+        docentePanel.setLayout(docentePanelLayout);
+        docentePanelLayout.setHorizontalGroup(
+            docentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(docentePanelLayout.createSequentialGroup()
+                .addGroup(docentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(docentePanelLayout.createSequentialGroup()
+                        .addComponent(yesRadioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(noRadioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(efetivadoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(docentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titulacaoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titulacaoSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
-        changePanel1Layout.setVerticalGroup(
-            changePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(changePanel1Layout.createSequentialGroup()
-                .addComponent(jLabel2)
+        docentePanelLayout.setVerticalGroup(
+            docentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(docentePanelLayout.createSequentialGroup()
+                .addGroup(docentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(efetivadoLabel)
+                    .addComponent(titulacaoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(changePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(docentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(docentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(yesRadioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(noRadioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(titulacaoSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(8, Short.MAX_VALUE))
+        );
+
+        efetivoPanel.setPreferredSize(new java.awt.Dimension(150, 60));
+
+        areaLabel.setText("Área");
+
+        areaSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Biológicas", "Exatas", "Humanas", "Saúde" }));
+        areaSelector.setToolTipText("");
+
+        javax.swing.GroupLayout efetivoPanelLayout = new javax.swing.GroupLayout(efetivoPanel);
+        efetivoPanel.setLayout(efetivoPanelLayout);
+        efetivoPanelLayout.setHorizontalGroup(
+            efetivoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(efetivoPanelLayout.createSequentialGroup()
+                .addGroup(efetivoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(areaSelector, javax.swing.GroupLayout.Alignment.LEADING, 0, 150, Short.MAX_VALUE)
+                    .addComponent(areaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        efetivoPanelLayout.setVerticalGroup(
+            efetivoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(efetivoPanelLayout.createSequentialGroup()
+                .addComponent(areaLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(areaSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 16, Short.MAX_VALUE))
+        );
+
+        substitutoPanel.setPreferredSize(new java.awt.Dimension(150, 60));
+
+        cargaHorariaLabel.setText("Carga Horária");
+
+        cargaHorariaSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "12", "24" }));
+        cargaHorariaSelector.setToolTipText("");
+
+        javax.swing.GroupLayout substitutoPanelLayout = new javax.swing.GroupLayout(substitutoPanel);
+        substitutoPanel.setLayout(substitutoPanelLayout);
+        substitutoPanelLayout.setHorizontalGroup(
+            substitutoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(substitutoPanelLayout.createSequentialGroup()
+                .addGroup(substitutoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(cargaHorariaSelector, javax.swing.GroupLayout.Alignment.LEADING, 0, 150, Short.MAX_VALUE)
+                    .addComponent(cargaHorariaLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        substitutoPanelLayout.setVerticalGroup(
+            substitutoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(substitutoPanelLayout.createSequentialGroup()
+                .addComponent(cargaHorariaLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cargaHorariaSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,8 +283,15 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(changePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(efetivoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(substitutoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(salvarButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(limparButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -246,37 +301,31 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                                 .addComponent(deptoCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(funcCodeField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(funcCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(changePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tecnicoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(168, 168, 168)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(funcNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(deptoName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(deptoNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(saveButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(162, 162, 162)
-                                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(funcNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                .addComponent(deptoName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(deptoNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(category, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(categorySelector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(salaryField, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                                        .addComponent(salary, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(salaryField1)
-                                        .addComponent(salary1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addComponent(funcName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
-                .addContainerGap(73, Short.MAX_VALUE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(category, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(categorySelector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(salaryBaseField, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                                            .addComponent(salary, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(salarioFinalField)
+                                            .addComponent(salarioFinalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(funcName, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(docentePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,96 +363,151 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(salary1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(salarioFinalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(salaryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(salaryField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(salaryBaseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(salarioFinalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(changePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(changePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(118, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(saveButton1)
-                            .addComponent(clearButton))
-                        .addGap(18, 18, 18)
-                        .addComponent(backButton)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(tecnicoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(docentePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(efetivoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(substitutoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(limparButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(salvarButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void yesRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesRadioBtnActionPerformed
+        String[] efetivo = {"D1", "D2", "D3"};
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(efetivo);
+        nivelSelector.setModel(model);
+        efetivoPanel.setVisible(true);
+        substitutoPanel.setVisible(false);
+    }//GEN-LAST:event_yesRadioBtnActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        tecnicoPanel.setVisible(false);
+        docentePanel.setVisible(false);
+        efetivoPanel.setVisible(false);
+        substitutoPanel.setVisible(false);
+    }//GEN-LAST:event_formComponentShown
+
+    private void noRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noRadioBtnActionPerformed
+        String[] substituto = {"S1", "S2"};
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(substituto);
+        nivelSelector.setModel(model);
+        efetivoPanel.setVisible(false);
+        substitutoPanel.setVisible(true);
+    }//GEN-LAST:event_noRadioBtnActionPerformed
+
+    private void salvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarButtonActionPerformed
+        Controlador control = new Controlador();
+        int tipo = categorySelector.getSelectedIndex();
+        if (tipo == 1) {
+            String codigo = funcCodeField.getText();
+            String nome = funcNameField.getText();
+            String nivel = (String) nivelSelector.getSelectedItem();
+            double salario = Double.parseDouble(salaryBaseField.getText());
+            String funcao = (String) funcaoSelector.getSelectedItem();
+            Funcionario f = new Tecnico(codigo, nome, salario, nivel, funcao);
+            control.adicionarFuncinario(f, deptoCodeField.getText());
+        } else {
+            if (yesRadioBtn.isSelected()) {
+                String codigo = funcCodeField.getText();
+                String nome = funcNameField.getText();
+                String nivel = (String) nivelSelector.getSelectedItem();
+                double salario = Double.parseDouble(salaryBaseField.getText());
+                String titulacao = (String) titulacaoSelector.getSelectedItem();
+                String area = (String) areaSelector.getSelectedItem();
+                Funcionario f = new Efetivo(codigo, nome, salario, nivel, titulacao, area);
+                control.adicionarFuncinario(f, deptoCodeField.getText());
+            }
+            else {
+                String codigo = funcCodeField.getText();
+                String nome = funcNameField.getText();
+                String nivel = (String) nivelSelector.getSelectedItem();
+                double salario = Double.parseDouble(salaryBaseField.getText());
+                String titulacao = (String) titulacaoSelector.getSelectedItem();
+                int cargaHoraria = (int) cargaHorariaSelector.getSelectedItem();
+                Funcionario f = new Substituto(codigo, nome, salario, nivel, titulacao, cargaHoraria);
+                control.adicionarFuncinario(f, deptoCodeField.getText());
+            }
+        }
+    }//GEN-LAST:event_salvarButtonActionPerformed
+
     private void categorySelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categorySelectorActionPerformed
-        int indexSelected = categorySelector.getSelectedIndex();
-        switch (indexSelected) {
+        int index = categorySelector.getSelectedIndex();
+        DefaultComboBoxModel<String> model;
+        switch (index) {
             case 1 -> {
                 System.out.println("Tecnico");
-                changePanel.setVisible(true);
-                changePanel1.setVisible(false);
+                String[] tecnico = {"T1", "T2"};
+                model = new DefaultComboBoxModel<>(tecnico);
+                nivelSelector.setModel(model);
+                tecnicoPanel.setVisible(true);
+                docentePanel.setVisible(false);
+                efetivoPanel.setVisible(false);
+                substitutoPanel.setVisible(false);
             }
             case 2 -> {
-                System.out.println("Docente");
-                changePanel.setVisible(false);
-                changePanel1.setVisible(true);
+                tecnicoPanel.setVisible(false);
+                docentePanel.setVisible(true);
+                if (yesRadioBtn.isSelected()) {
+                    System.out.println("Docente");
+                    String[] efetivo = {"D1", "D2", "D3"};
+                    model = new DefaultComboBoxModel<>(efetivo);
+                    nivelSelector.setModel(model);
+                    tecnicoPanel.setVisible(false);
+                    docentePanel.setVisible(true);
+                    efetivoPanel.setVisible(true);
+                    substitutoPanel.setVisible(false);
+                } else if (noRadioBtn.isSelected()) {
+                    System.out.println("Substituto");
+                    String[] substituto = {"S1", "S2"};
+                    model = new DefaultComboBoxModel<>(substituto);
+                    nivelSelector.setModel(model);
+                    efetivoPanel.setVisible(false);
+                    substitutoPanel.setVisible(true);
+                } else {
+                    String[] empty = {"-"};
+                    model = new DefaultComboBoxModel<>(empty);
+                    nivelSelector.setModel(model);
+                }
             }
-            default -> {
-                changePanel.setVisible(false);
-                changePanel1.setVisible(false);
-            }
+            default -> System.out.println("-");
         }
     }//GEN-LAST:event_categorySelectorActionPerformed
 
-    private void salaryField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salaryField1ActionPerformed
-
-    private void nivelSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nivelSelectorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nivelSelectorActionPerformed
-
-    private void salaryFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salaryFieldActionPerformed
-
-    private void funcCodeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcCodeFieldActionPerformed
-        String code;
-        code = funcCodeField.getText();
-        System.out.println(code);
-    }//GEN-LAST:event_funcCodeFieldActionPerformed
-
-    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clearButtonActionPerformed
-
-    private void saveButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_saveButton1ActionPerformed
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_backButtonActionPerformed
-
-    private void funcNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funcNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_funcNameFieldActionPerformed
-
-    private void nivelSelector1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nivelSelector1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nivelSelector1ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        changePanel.setVisible(false);
-        changePanel1.setVisible(false);
-    }//GEN-LAST:event_formComponentShown
+    private void limparButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparButtonActionPerformed
+        String text = "";
+        deptoCodeField.setText(text);
+        funcCodeField.setText(text);
+        deptoNameField.setText(text);
+        funcNameField.setText(text);
+        buttonGroup1.clearSelection();
+        salaryBaseField.setText(text);
+        salarioFinalField.setText(text);
+        String[] clear = {"-"};
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(clear);
+        nivelSelector.setModel(model);
+        areaSelector.setSelectedIndex(0);
+        funcaoSelector.setSelectedIndex(0);
+        categorySelector.setSelectedIndex(0);
+        cargaHorariaSelector.setSelectedIndex(0);
+        titulacaoSelector.setSelectedIndex(0);
+        tecnicoPanel.setVisible(false);
+        docentePanel.setVisible(false);
+        efetivoPanel.setVisible(false);
+        substitutoPanel.setVisible(false);
+    }//GEN-LAST:event_limparButtonActionPerformed
 
     public static void main(String args[]) {
         
@@ -415,35 +519,39 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
+    private javax.swing.JLabel areaLabel;
+    private javax.swing.JComboBox<String> areaSelector;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JLabel cargaHorariaLabel;
+    private javax.swing.JComboBox<String> cargaHorariaSelector;
     private javax.swing.JLabel category;
     private javax.swing.JComboBox<String> categorySelector;
-    private javax.swing.JPanel changePanel;
-    private javax.swing.JPanel changePanel1;
-    private javax.swing.JButton clearButton;
     private javax.swing.JLabel deptoCode;
     private javax.swing.JTextField deptoCodeField;
     private javax.swing.JLabel deptoName;
     private javax.swing.JTextField deptoNameField;
+    private javax.swing.JPanel docentePanel;
+    private javax.swing.JLabel efetivadoLabel;
+    private javax.swing.JPanel efetivoPanel;
     private javax.swing.JLabel funcCode;
     private javax.swing.JTextField funcCodeField;
     private javax.swing.JLabel funcName;
     private javax.swing.JTextField funcNameField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel funcaoLabel;
+    private javax.swing.JComboBox<String> funcaoSelector;
+    private javax.swing.JButton limparButton;
     private javax.swing.JLabel nivelLabel;
     private javax.swing.JComboBox<String> nivelSelector;
-    private javax.swing.JComboBox<String> nivelSelector1;
+    private javax.swing.JRadioButton noRadioBtn;
+    private javax.swing.JTextField salarioFinalField;
+    private javax.swing.JLabel salarioFinalLabel;
     private javax.swing.JLabel salary;
-    private javax.swing.JLabel salary1;
-    private javax.swing.JTextField salaryField;
-    private javax.swing.JTextField salaryField1;
-    private javax.swing.JButton saveButton1;
+    private javax.swing.JTextField salaryBaseField;
+    private javax.swing.JButton salvarButton;
+    private javax.swing.JPanel substitutoPanel;
+    private javax.swing.JPanel tecnicoPanel;
+    private javax.swing.JLabel titulacaoLabel;
+    private javax.swing.JComboBox<String> titulacaoSelector;
+    private javax.swing.JRadioButton yesRadioBtn;
     // End of variables declaration//GEN-END:variables
 }
